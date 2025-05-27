@@ -1,0 +1,7 @@
+# 忽略 MNIST 原始数据
+mnist/MNIST/raw/
+
+# 忽略 pycache 编译文件
+__pycache__/
+*.pyc
+
