@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 import numpy as np
 import math
-from timm.models.vision_transformer import PatchEmbed
 from torch.nn.functional import scaled_dot_product_attention
 from typing import Tuple
 

@@ -3,7 +3,6 @@ import torch.nn as nn
 from .sit_block import SiTBlock
 from .utils import precompute_freqs_cis_2d,TimestepEmbedder,LabelEmbedder,FinalLayer,Embed
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
 
 class SIT(nn.Module):
     def __init__(
@@ -11,7 +10,7 @@ class SIT(nn.Module):
             in_channels=1,
             num_groups=4,
             hidden_size=128,
-            num_blocks=8,
+            num_blocks=12,
             patch_size=2,
             num_classes=10,
             learn_sigma=True,
@@ -92,29 +91,7 @@ class SIT(nn.Module):
         return v
     
 
-if __name__ == "__main__":
-    B, C, H, W      = 4, 3, 32, 32
-    patch_size      = 2
-    num_classes     = 10
-    t_max           = 1000
-
-    model = SIT(
-        in_channels=C,
-        hidden_size=128,
-        num_groups=4,
-        num_blocks=8,
-        patch_size=patch_size,
-        num_classes=num_classes,
-    ).to(device)
-
-    x = torch.randn(B, C, H, W, device=device, requires_grad=True)
-    t = torch.randint(0, t_max, (B,), device=device)
-    y = torch.randint(0, num_classes, (B,), device=device)
-
-    v = model(x, t, y) 
-
-    print(x.shape)
-    print(v.shape)              
+            
 
 
 
